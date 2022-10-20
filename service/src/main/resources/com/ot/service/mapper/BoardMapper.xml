@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ot.service.mapper.BoardMapper">
+
+    <insert id="insertBoard" parameterType="com.ot.service.dto.board.request.PostBoard" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO BOARD ( TITLE
+                          , CONTENTS
+                          , REG_DATE
+                          , REG_USER_SEQ
+                          , UPD_DATE
+                          , UPD_USER_SEQ
+                          , DELETE_YN)
+        VALUES ( #{title}
+               , #{contents}
+               , CURRENT_TIMESTAMP()
+               , #{regUserSeq}
+               , CURRENT_TIMESTAMP()
+               , #{regUserSeq}
+               , 'N')
+    </insert>
+
+
+    <update id="updateBoard" parameterType="com.ot.service.dto.board.request.PutBoard">
+        UPDATE BOARD
+        SET TITLE        = #{title}
+          , CONTENTS     = #{contents}
+          , UPD_USER_SEQ = #{updUserSeq}
+          , UPD_DATE     = CURRENT_TIMESTAMP()
+        WHERE ID = #{id}
+    </update>
+
+
+    <select id="selectBoard" parameterType="java.lang.Long" resultType="com.ot.service.dto.board.response.Board">
+        SELECT *
+        FROM BOARD
+        WHERE ID = #{id}
+    </select>
+
+
+    <select id="selectBoardAll" resultType="com.ot.service.dto.board.response.Board">
+        SELECT *
+        FROM BOARD
+        WHERE DELETE_YN = 'N'
+        ORDER BY id DESC
+    </select>
+
+
+    <update id="deleteBoard" parameterType="java.lang.Long">
+        UPDATE BOARD
+        SET DELETE_YN = 'Y'
+        WHERE ID = #{id}
+    </update>
+
+</mapper>
