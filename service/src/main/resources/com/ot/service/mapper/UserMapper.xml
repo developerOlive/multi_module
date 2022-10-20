@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ot.service.mapper.UserMapper">
+
+    <select id="selectUserAll" parameterType="java.lang.String" resultType="com.ot.service.dto.user.response.UserDto">
+        SELECT *
+        FROM USER
+        WHERE STATUS = '01'
+        ORDER BY id DESC
+    </select>
+
+
+    <insert id="insertUser" parameterType="com.ot.service.dto.user.response.UserDto" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO USER ( USER_ID
+                         , PASSWORD
+                         , NAME
+                         , PHONE
+                         , ROLES
+                         , USER_TYPE
+                         , REG_DATE
+                         , LAST_LOGIN_DATE
+                         , UPDATE_DATE
+                         , STATUS
+                         , REG_USER_SEQ
+                         , UPD_USER_SEQ)
+        VALUES ( #{userId}
+               , #{password}
+               , #{name}
+               , #{phone}
+               , #{roles}
+               , #{userType}
+               , CURRENT_TIMESTAMP()
+               , CURRENT_TIMESTAMP()
+               , CURRENT_TIMESTAMP()
+               , '01'
+               , #{regUserSeq}
+               , #{updUserSeq})
+    </insert>
+
+
+    <select id="selectUserById" parameterType="java.lang.Long" resultType="com.ot.service.dto.user.response.UserDto">
+        SELECT *
+        FROM USER
+        WHERE ID = #{id}
+    </select>
+
+
+    <select id="getUserByUserId" parameterType="java.lang.String" resultType="com.ot.service.dto.user.response.UserDto">
+        SELECT *
+        FROM USER
+        WHERE USER_ID = #{userId}
+    </select>
+
+
+    <update id="updateUser" parameterType="com.ot.service.dto.user.request.UserPutDto">
+        UPDATE USER
+        SET PASSWORD     = #{password}
+          , NAME         = #{name}
+          , PHONE        = #{phone}
+          , UPD_USER_SEQ = #{updUserSeq}
+          , UPDATE_DATE  = CURRENT_TIMESTAMP()
+        WHERE ID = #{id}
+    </update>
+
+
+    <update id="deleteUserById" parameterType="HashMap">
+        UPDATE USER
+        SET STATUS       = '02'
+          , UPD_USER_SEQ = #{updUserSeq}
+          , UPDATE_DATE  = CURRENT_TIMESTAMP()
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateUserRole" parameterType="com.ot.service.dto.user.request.UserRoleUpdateDto">
+        UPDATE USER
+        SET ROLES        = #{roles}
+          , UPD_USER_SEQ = #{updUserSeq}
+          , UPDATE_DATE     = CURRENT_TIMESTAMP()
+        WHERE ID = #{id}
+    </update>
+
+</mapper>
