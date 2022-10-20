@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ot.service.mapper.LogMapper">
+
+
+    <insert id="insertLog" parameterType="com.ot.service.dto.log.ApiLogHistoryDto" useGeneratedKeys="true" keyProperty="id">
+
+        INSERT INTO API_LOG_HISTORY (
+                              LOG_TYPE_CD
+                              , PATH
+                              , REQ_MSG
+                              , RES_MSG
+                              , DURATION_TIME
+                              , IS_ERROR
+                              , ERROR_MSG
+                              , START_DT
+                              , END_DT
+                              , CLIENT_ADDR
+                              , THREAD_ID
+        ) VALUES (
+                 #{logTypeCd}
+                 , #{path}
+                 , #{reqMsg}
+                 , #{resMsg}
+                 , #{durationTime}
+                 , #{isError}
+                 , #{errorMsg}
+                 , #{startDt}
+                 , #{endDt}
+                 , #{clientIpAddr}
+                 , #{threadId}
+                 )
+    </insert>
+</mapper>
