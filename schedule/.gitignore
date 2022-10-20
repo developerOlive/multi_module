@@ -31,3 +31,25 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/.idea/.gitignore
+/target/**
+/.idea/**
+/log/**
+*.iml
+*.idea
+./idea
+./idea.*
+./idea/**
+.idea/**
+/log
+./log
+./log.*
+/.idea/.gitignore
+/target/**
+/.idea/**
+/log/**
+/.log
+/.log/**
+.log
+./idea/libraries/**
