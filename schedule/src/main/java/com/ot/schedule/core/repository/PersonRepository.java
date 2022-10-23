@@ -1,4 +1,7 @@
 package com.ot.schedule.core.repository;
 
-public class PersonRepository {
+import com.ot.schedule.core.domain.Person;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PersonRepository extends JpaRepository<Person, Integer> {
 }
