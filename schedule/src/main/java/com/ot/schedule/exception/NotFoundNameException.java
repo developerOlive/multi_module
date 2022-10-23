@@ -1,4 +1,4 @@
 package com.ot.schedule.exception;
 
-public class NotFoundNameException {
+public class NotFoundNameException extends RuntimeException {
 }
