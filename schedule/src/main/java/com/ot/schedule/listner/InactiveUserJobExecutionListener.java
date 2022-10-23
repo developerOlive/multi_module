@@ -1,4 +1,4 @@
-package com.ot.schedule.listener;
+package com.ot.schedule.listner;
 
 import com.ot.schedule.core.domain.User;
 import com.ot.schedule.core.repository.UserRepository;
